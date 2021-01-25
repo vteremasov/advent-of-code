@@ -13,7 +13,7 @@ pub fn calc_additional_fuel(mass: Vec<f64>) -> i64 {
         .sum()
 }
 
-pub fn parse_input(input: String) -> Vec<f64> {
+pub fn parse_input_day1(input: String) -> Vec<f64> {
     input
         .split("\n")
         .filter(|s| !s.is_empty())
@@ -89,7 +89,7 @@ mod test {
 2
 3
 4";
-        let res = parse_input(input.into());
+        let res = parse_input_day1(input.into());
 
         assert_eq!(res, vec![1.0, 2.0, 3.0, 4.0]);
     }
