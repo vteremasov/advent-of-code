@@ -4,6 +4,7 @@ use std::process;
 
 use year2019::day1::{calc_additional_fuel, calc_fuel, parse_input_day1};
 use year2019::day2::{computer_run, computer_run_find, parse_input_day2, restore_state1202};
+use year2019::day3::{get_closest_dist, parse_input_day3};
 
 pub mod year2019;
 
@@ -65,6 +66,13 @@ fn main() {
             println!(
                 "Result is: {}",
                 computer_run_find(restore_state1202(parse_input_day2(config.input)), 19690720)
+            );
+            process::exit(0);
+        }
+        "day3" => {
+            println!(
+                "Result is: {}",
+                get_closest_dist(parse_input_day3(config.input))
             );
             process::exit(0);
         }
