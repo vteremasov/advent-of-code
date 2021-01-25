@@ -1,5 +1,7 @@
 # advent-of-code 2019
 
+![Workflow](https://github.com/vteremasov/advent-of-code/workflows/Rust/badge.svg)
+
 ## How to setup:
 
 To set up env install rustup from https://rustup.rs/
