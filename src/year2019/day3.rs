@@ -56,7 +56,11 @@ fn parse_navigation(input: String) -> Vec<Navigation> {
         .map(|s| String::from(s))
         .map(|s| Navigation {
             dir: s[0..1].to_owned(),
-            steps: s[1..].parse::<i64>().expect(&format!("Expected digit but got: {} with len: {}", s, s.len())),
+            steps: s[1..].parse::<i64>().expect(&format!(
+                "Expected digit but got: {} with len: {}",
+                s,
+                s.len()
+            )),
         })
         .collect::<Vec<Navigation>>()
 }

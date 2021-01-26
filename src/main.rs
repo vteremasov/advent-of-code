@@ -5,6 +5,7 @@ use std::process;
 use year2019::day1::{calc_additional_fuel, calc_fuel, parse_input_day1};
 use year2019::day2::{computer_run, computer_run_find, parse_input_day2, restore_state1202};
 use year2019::day3::{get_closest_dist, get_fewest_steps, parse_input_day3};
+use year2019::day4::{parse_input_day4, find_passwords};
 
 pub mod year2019;
 
@@ -15,7 +16,7 @@ struct Config {
 }
 
 fn read_input(p: String) -> String {
-	fs::read_to_string(p).expect("Input file not found: command <day> <path_to_file>")
+    fs::read_to_string(p).expect("Input file not found: command <day> <path_to_file>")
 }
 
 impl Config {
@@ -81,6 +82,9 @@ fn main() {
             );
             process::exit(0);
         }
+        "day4" => {
+            println!("Result is: {}", find_passwords(parse_input_day4(config.input)).len())
+        }
 
         _ => {
             eprintln!("Not implemented or not found for {:?}", config);
@@ -95,26 +99,53 @@ mod test {
 
     #[test]
     fn day1() {
-        assert_eq!(calc_fuel(parse_input_day1(read_input("./src/input/day1.txt".into()))), 3308377);
+        assert_eq!(
+            calc_fuel(parse_input_day1(read_input("./src/input/day1.txt".into()))),
+            3308377
+        );
     }
-	#[test]
-	fn day1_1() {
-		assert_eq!(calc_additional_fuel(parse_input_day1(read_input("./src/input/day1.txt".into()))), 4959709);
-	}
-	#[test]
-	fn day2() {
-		assert_eq!(computer_run(restore_state1202(parse_input_day2(read_input("./src/input/day2.txt".into())))), 5098658);
-	}
-	#[test]
-	fn day2_1() {
-		assert_eq!(computer_run_find(restore_state1202(parse_input_day2(read_input("./src/input/day2.txt".into()))), 19690720), 5064);
-	}
-	#[test]
-	fn day3() {
-		assert_eq!(get_closest_dist(parse_input_day3(read_input("./src/input/day3.txt".into()))), 855);
-	}
-	#[test]
-	fn day3_1() {
-		assert_eq!(get_fewest_steps(parse_input_day3(read_input("./src/input/day3.txt".into()))), 11238);
-	}
+    #[test]
+    fn day1_1() {
+        assert_eq!(
+            calc_additional_fuel(parse_input_day1(read_input("./src/input/day1.txt".into()))),
+            4959709
+        );
+    }
+    #[test]
+    fn day2() {
+        assert_eq!(
+            computer_run(restore_state1202(parse_input_day2(read_input(
+                "./src/input/day2.txt".into()
+            )))),
+            5098658
+        );
+    }
+    #[test]
+    fn day2_1() {
+        assert_eq!(
+            computer_run_find(
+                restore_state1202(parse_input_day2(read_input("./src/input/day2.txt".into()))),
+                19690720
+            ),
+            5064
+        );
+    }
+    #[test]
+    fn day3() {
+        assert_eq!(
+            get_closest_dist(parse_input_day3(read_input("./src/input/day3.txt".into()))),
+            855
+        );
+    }
+    #[test]
+    fn day3_1() {
+        assert_eq!(
+            get_fewest_steps(parse_input_day3(read_input("./src/input/day3.txt".into()))),
+            11238
+        );
+    }
+    #[test]
+    fn day4() {
+        assert_eq!(find_passwords(parse_input_day4(read_input("./src/input/day4.txt".into()))).len(), 1169);
+    }
 }
