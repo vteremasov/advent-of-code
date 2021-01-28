@@ -5,7 +5,7 @@ use std::process;
 use year2019::day1::{calc_additional_fuel, calc_fuel, parse_input_day1};
 use year2019::day2::{computer_run, computer_run_find, parse_input_day2, restore_state1202};
 use year2019::day3::{get_closest_dist, get_fewest_steps, parse_input_day3};
-use year2019::day4::{parse_input_day4, find_passwords};
+use year2019::day4::{find_passwords, find_passwords_2_eq, parse_input_day4};
 
 pub mod year2019;
 
@@ -83,7 +83,14 @@ fn main() {
             process::exit(0);
         }
         "day4" => {
-            println!("Result is: {}", find_passwords(parse_input_day4(config.input)).len())
+            println!(
+                "Part 1: {}",
+                find_passwords(parse_input_day4(config.input.clone())).len()
+            );
+            println!(
+                "Part 2: {}",
+                find_passwords_2_eq(parse_input_day4(config.input.clone())).len()
+            );
         }
 
         _ => {
@@ -146,6 +153,16 @@ mod test {
     }
     #[test]
     fn day4() {
-        assert_eq!(find_passwords(parse_input_day4(read_input("./src/input/day4.txt".into()))).len(), 1169);
+        assert_eq!(
+            find_passwords(parse_input_day4(read_input("./src/input/day4.txt".into()))).len(),
+            1169
+        );
+    }
+    #[test]
+    fn day4_1() {
+        assert_eq!(
+            find_passwords_2_eq(parse_input_day4(read_input("./src/input/day4.txt".into()))).len(),
+            757
+        );
     }
 }

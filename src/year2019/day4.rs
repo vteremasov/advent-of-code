@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 fn is_increasing_and_has_eq_didgits(num: i64) -> bool {
     let mut tmp = num;
     let mut del = 1;
@@ -17,6 +19,23 @@ fn is_increasing_and_has_eq_didgits(num: i64) -> bool {
     }
 
     res
+}
+
+fn has_2_eq_digits(num: &i64) -> bool {
+    let mut tmp = *num;
+    let mut accumulator = HashMap::new();
+
+    while tmp > 0 {
+        let curr = tmp % 10;
+        tmp /= 10;
+        if accumulator.contains_key(&curr) {
+            accumulator.insert(curr, accumulator.get(&curr).unwrap() + 1);
+        } else {
+            accumulator.insert(curr, 1);
+        }
+    }
+
+    accumulator.values().any(|v| *v == 2)
 }
 
 pub fn parse_input_day4(input: String) -> (i64, i64) {
@@ -40,9 +59,28 @@ pub fn find_passwords(range: (i64, i64)) -> Vec<i64> {
     result
 }
 
+pub fn find_passwords_2_eq(range: (i64, i64)) -> Vec<i64> {
+    find_passwords(range)
+        .iter()
+        .filter(|n| has_2_eq_digits(n))
+        .map(|n| *n)
+        .collect()
+}
+
 #[cfg(test)]
 mod test {
     use super::*;
+
+    #[test]
+    fn test_find_passwords_2_eq() {
+        assert!(has_2_eq_digits(&1123456));
+        assert!(has_2_eq_digits(&1245699));
+        assert!(!has_2_eq_digits(&12344456));
+        assert!(has_2_eq_digits(&112233));
+        assert!(!has_2_eq_digits(&123444));
+        assert!(has_2_eq_digits(&111122));
+        assert!(!has_2_eq_digits(&689999));
+    }
 
     #[test]
     fn test_parse_input_day4() {
